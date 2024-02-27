@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace ElectraCharge.Controllers
 {
-    public class ChargersController : Controller
+    public class CargadoresController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        // Constructor del controlador ChargersController
-        public ChargersController(ApplicationDbContext context)
+        // Constructor del controlador CargadoresController
+        public CargadoresController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -18,41 +18,41 @@ namespace ElectraCharge.Controllers
         public IActionResult Index()
         {
             // Obtener la lista de cargadores desde la base de datos
-            var chargers = _context.Chargers.ToList();
-            return View(chargers);
+            var cargadores = _context.Cargadores.ToList();
+            return View(cargadores);
         }
 
         // Acción para registrar un nuevo cargador
         [HttpPost]
-        public IActionResult Registrar(Charger charger)
+        public IActionResult Registrar(Cargador cargador)
         {
             if (ModelState.IsValid)
             {
                 // Agregar el cargador a la base de datos
-                _context.Chargers.Add(charger);
+                _context.Cargadores.Add(cargador);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(charger);
+            return View(cargador);
         }
 
         // Acción para mostrar el formulario de edición de un cargador
         public IActionResult Editar(int id)
         {
             // Buscar el cargador por su id
-            var charger = _context.Chargers.Find(id);
-            if (charger == null)
+            var cargador = _context.Cargadores.Find(id);
+            if (cargador == null)
             {
                 return NotFound();
             }
-            return View(charger);
+            return View(cargador);
         }
 
         // Acción para procesar la edición de un cargador
         [HttpPost]
-        public IActionResult Editar(int id, Charger charger)
+        public IActionResult Editar(int id, Cargador cargador)
         {
-            if (id != charger.Id)
+            if (id != cargador.Id)
             {
                 return NotFound();
             }
@@ -60,23 +60,23 @@ namespace ElectraCharge.Controllers
             if (ModelState.IsValid)
             {
                 // Actualizar el cargador en la base de datos
-                _context.Update(charger);
+                _context.Update(cargador);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(charger);
+            return View(cargador);
         }
 
         // Acción para mostrar la confirmación de eliminación de un cargador
         public IActionResult Eliminar(int id)
         {
             // Buscar el cargador por su id
-            var charger = _context.Chargers.Find(id);
-            if (charger == null)
+            var cargador = _context.Cargadores.Find(id);
+            if (cargador == null)
             {
                 return NotFound();
             }
-            return View(charger);
+            return View(cargador);
         }
 
         // Acción para confirmar la eliminación de un cargador
@@ -84,14 +84,14 @@ namespace ElectraCharge.Controllers
         public IActionResult ConfirmarEliminar(int id)
         {
             // Buscar el cargador por su id
-            var charger = _context.Chargers.Find(id);
-            if (charger == null)
+            var cargador = _context.Cargadores.Find(id);
+            if (cargador == null)
             {
                 return NotFound();
             }
 
             // Eliminar el cargador de la base de datos
-            _context.Chargers.Remove(charger);
+            _context.Cargadores.Remove(cargador);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

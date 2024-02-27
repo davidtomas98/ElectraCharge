@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cargadores Eléctricos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <!-- Formulario para dar de alta un cargador -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mt-5">Alta de Cargador</h2>
+            <!-- Formulario de alta de cargador -->
+            @using (Html.BeginForm("Registrar", "Cargadores", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" id="marca" name="Marca" required>
+                </div>
+                <div class="form-group">
+                    <label for="potencia">Potencia (kW)</label>
+                    <input type="number" class="form-control" id="potencia" name="Potencia" required>
+                </div>
+                <div class="form-group">
+                    <label for="ubicacion">Ubicación</label>
+                    <input type="text" class="form-control" id="ubicacion" name="Ubicacion" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            }
+        </div>
+    </div>
+
+    <!-- Título de la lista de cargadores -->
+    <h1 class="text-center mt-5 mb-4">Lista de Cargadores Eléctricos</h1>
+
+    <div class="row mb-3">
+        <!-- Filtros de búsqueda -->
+        <div class="col-md-6">
+            <select class="form-control" id="filtro">
+                <option value="marca">Marca</option>
+                <option value="potencia">Potencia (kW)</option>
+                <option value="ubicacion">Ubicación</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar" id="txtBusqueda">
+        </div>
+    </div>
+    <!-- Tabla de cargadores -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Potencia (kW)</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th> 
+                </tr>
+            </thead>
+            <tbody id="tablaCargadores">
+                <!-- Iteración sobre cada cargador en el modelo -->
+                @foreach (var cargador in Model)
+                {
+                    <tr>
+                        <td>@cargador.Id</td>
+                        <td>@cargador.Marca</td>
+                        <td>@cargador.Potencia</td>
+                        <td>@cargador.Ubicacion</td>
+                        <td>
+                            <!-- Etiqueta que muestra el estado del cargador -->
+                            @if(cargador.Estado == "disponible")
+                            {
+                                <span class="badge rounded-pill bg-success">Disponible</span>
+                            }
+                            else
+                            {
+                                <span class="badge rounded-pill bg-danger">No disponible</span>
+                            }
+                        </td>
+                        <td>
+                            <!-- Acciones para editar y eliminar el cargador -->
+                            <a href="@Url.Action("Editar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
+                            <a href="@Url.Action("Eliminar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Inclusión de scripts al final del cuerpo del documento -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="~/js/filter.js" asp-append-version="true"></script>
+</body>
+</html>

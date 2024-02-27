@@ -8,7 +8,6 @@ namespace ElectraCharge.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        // Constructor que recibe el contexto de la base de datos
         public UsuariosController(ApplicationDbContext context)
         {
             _context = context;

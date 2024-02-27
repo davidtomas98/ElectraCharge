@@ -25,5 +25,7 @@ namespace ElectraCharge.Models
         // Propiedad para el correo electrónico del usuario
         [Column("email")]
         public string CorreoElectronico { get; set; } = string.Empty;
+        
+        public virtual ICollection<Asignar>? Asignaciones { get; set; }
     }
 }

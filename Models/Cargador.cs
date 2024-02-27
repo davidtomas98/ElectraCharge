@@ -4,7 +4,7 @@ namespace ElectraCharge.Models
 {
     // Atributos para mapear la clase a la tabla "Cargadores" en la base de datos
     [Table("Cargadores")]
-    public class Charger
+    public class Cargador
     {
         // Propiedad para el ID del cargador
         [Column("id_cargador")]
@@ -27,9 +27,11 @@ namespace ElectraCharge.Models
         public string Estado { get; set; } = string.Empty;
 
         // Constructor para inicializar el estado del cargador como "Disponible" por defecto
-        public Charger()
+        public Cargador()
         {
             Estado = "Disponible";
         }
+
+        public virtual ICollection<Asignar>? Asignaciones { get; set; }
     }
 }

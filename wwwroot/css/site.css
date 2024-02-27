@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.light-green, .light-red{
+  width: 20px;
+  height: 20px;
+  display: inline-block; 
+  border-radius: 50%; 
+  margin-left:10px;
+}
+.light-green {
+  background-color: #4CAF50;
+}
+
+.light-red {
+  background-color: #ff1100;
+}
