@@ -1,0 +1,71 @@
+@model ElectraCharge.Models.Charger
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cargador</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title text-center">Editar Cargador</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="marca">Marca:</label>
+                            <input type="text" class="form-control" id="marca" name="Marca" value="@Model.Marca">
+                        </div>
+                        <div class="form-group">
+                            <label for="potencia">Potencia (kW):</label>
+                            <input type="text" class="form-control" id="potencia" name="Potencia" value="@Model.Potencia">
+                        </div>
+                        <div class="form-group">
+                            <label for="ubicacion">Ubicación:</label>
+                            <input type="text" class="form-control" id="ubicacion" name="Ubicacion" value="@Model.Ubicacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado:</label>
+                            <select class="form-control" id="estado" name="Estado">
+                                <option value="disponible">Disponible</option>
+                                <option value="no disponible">No Disponible</option>
+                            </select>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a asp-action="Index" class="btn btn-secondary btn-block">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var estado = "@Model.Estado";
+            var select = document.getElementById("estado");
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === estado) {
+                    select.options[i].selected = true;
+                    break;
+                }
+            }
+        });
+    </script>
+}
+</body>
+</html>

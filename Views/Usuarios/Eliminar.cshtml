@@ -1,0 +1,39 @@
+@model ElectraCharge.Models.Usuario
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Usuario</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title">Eliminar Usuario</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Id:</strong> @Model.Id</p>
+                    <p><strong>Nombre:</strong> @Model.Nombre</p>
+                    <p><strong>Apellido 1:</strong> @Model.Apellido1</p>
+                    <p><strong>Apellido 2:</strong> @Model.Apellido2</p>
+                    <p><strong>Correo Electrónico:</strong> @Model.CorreoElectronico</p>
+                    <hr>
+                    <p class="text-danger">¿Estás seguro de que quieres eliminar este usuario?</p>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger mr-2">Eliminar</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

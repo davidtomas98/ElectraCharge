@@ -1,0 +1,39 @@
+@model ElectraCharge.Models.Charger
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Cargador</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title">Eliminar Cargador</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Id:</strong> @Model.Id</p>
+                    <p><strong>Marca:</strong> @Model.Marca</p>
+                    <p><strong>Potencia (kW):</strong> @Model.Potencia</p>
+                    <p><strong>Ubicación:</strong> @Model.Ubicacion</p>
+                    <p><strong>Estado:</strong> @Model.Estado</p>
+                    <hr>
+                    <p class="text-danger">¿Estás seguro de que quieres eliminar este cargador?</p>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger mr-2">Eliminar</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

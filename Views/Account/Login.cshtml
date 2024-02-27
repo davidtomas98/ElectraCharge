@@ -1,0 +1,36 @@
+@model LoginViewModel
+
+<!-- Encabezado de la página -->
+<h2 class="text-center mb-4">Inicio de Sesión</h2>
+
+<!-- Verificar si hay un mensaje de error y mostrarlo si existe -->
+@if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["ErrorMessage"]
+    </div>
+}
+
+<!-- Formulario de inicio de sesión -->
+<form asp-action="Login" method="post" class="p-3 border rounded shadow-sm">
+    <!-- Campo para el correo electrónico -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" id="email" name="Email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+    </div>
+    <!-- Campo para la contraseña -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" name="Password" class="form-control" placeholder="Ingresa tu contraseña" required>
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+    </div>
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+</form>
+
+<!-- Sección para registrar si el usuario no tiene cuenta -->
+<div class="text-center mt-3">
+    <p class="mb-0">¿No tienes una cuenta?</p>
+    <a href="@Url.Action("Register", "Account")" class="btn btn-outline-secondary">Registrarse</a>
+</div>

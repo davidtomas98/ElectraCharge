@@ -1,0 +1,41 @@
+@model Administrador
+
+<!-- Encabezado de la página -->
+<h2 class="text-center mb-4">Registro</h2>
+
+<!-- Mostrar mensaje de éxito si existe -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Formulario de registro -->
+<form asp-action="Register" method="post" class="p-3 border rounded shadow-sm">
+    <!-- Campo para el nombre de usuario -->
+    <div class="mb-3">
+        <label for="username" class="form-label">Nombre de Usuario</label>
+        <input type="text" id="username" name="Username" class="form-control" placeholder="Ingresa tu nombre de usuario" required>
+    </div>
+    <!-- Campo para el correo electrónico -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" id="email" name="Email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+    </div>
+    <!-- Campo para la contraseña -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" name="Password" class="form-control" placeholder="Ingresa tu contraseña" required>
+        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+        <div class="form-text">La contraseña debe tener al menos una longitud mínima de 6 caracteres.</div>
+    </div>
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+</form>
+
+<!-- Sección para el enlace de inicio de sesión -->
+<div class="text-center mt-3">
+    <p class="mb-0">¿Ya tienes una cuenta? <a href="@Url.Action("Login", "Account")" class="btn btn-outline-secondary">Iniciar Sesión</a></p>
+</div>
