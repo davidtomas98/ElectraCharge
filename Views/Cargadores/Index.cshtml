@@ -14,7 +14,7 @@
     <!-- Formulario para dar de alta un cargador -->
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="text-center mt-5">Alta de Cargador</h2>
+            <h1 class="text-center mt-5 mb-4">Alta de Cargador</h1>
             <!-- Formulario de alta de cargador -->
             @using (Html.BeginForm("Registrar", "Cargadores", FormMethod.Post))
             {
@@ -52,47 +52,68 @@
         </div>
     </div>
     <!-- Tabla de cargadores -->
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Potencia (kW)</th>
-                    <th scope="col">Ubicación</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th> 
-                </tr>
-            </thead>
-            <tbody id="tablaCargadores">
-                <!-- Iteración sobre cada cargador en el modelo -->
-                @foreach (var cargador in Model)
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
                     <tr>
-                        <td>@cargador.Id</td>
-                        <td>@cargador.Marca</td>
-                        <td>@cargador.Potencia</td>
-                        <td>@cargador.Ubicacion</td>
-                        <td>
-                            <!-- Etiqueta que muestra el estado del cargador -->
-                            @if(cargador.Estado == "disponible")
-                            {
-                                <span class="badge rounded-pill bg-success">Disponible</span>
-                            }
-                            else
-                            {
-                                <span class="badge rounded-pill bg-danger">No disponible</span>
-                            }
-                        </td>
-                        <td>
-                            <!-- Acciones para editar y eliminar el cargador -->
-                            <a href="@Url.Action("Editar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="@Url.Action("Eliminar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
-                        </td>
+                        <th scope="col">Id</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Potencia (kW)</th>
+                        <th scope="col">Ubicación</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th> 
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="tablaCargadores">
+                    <!-- Iteración sobre cada cargador en la página actual -->
+                    @foreach (var cargador in ViewBag.Cargadores)
+                    {
+                        <tr>
+                            <td>@cargador.Id</td>
+                            <td>@cargador.Marca</td>
+                            <td>@cargador.Potencia</td>
+                            <td>@cargador.Ubicacion</td>
+                            <td>
+                                <!-- Etiqueta que muestra el estado del cargador -->
+                                @if(cargador.Estado == "disponible")
+                                {
+                                    <span class="badge rounded-pill bg-success">Disponible</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill bg-danger">No disponible</span>
+                                }
+                            </td>
+                            <td>
+                                <!-- Acciones para editar y eliminar el cargador -->
+                                <a href="@Url.Action("Editar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
+                                <a href="@Url.Action("Eliminar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botones de paginación -->
+        <div class="text-center">
+            @if (ViewBag.TotalPaginas > 1)
+            {
+                <div class="btn-group" role="group" aria-label="Navegación de páginas">
+                    <!-- Botón para ir a la página anterior -->
+                    @if (ViewBag.PaginaActual > 1)
+                    {
+                        <a href="@Url.Action("Index", "Cargadores", new { pagina = ViewBag.PaginaActual - 1 })" class="btn btn-primary"><i class="bi bi-chevron-left"></i> Página anterior</a>
+                    }
+
+                    <!-- Botón para ir a la página siguiente -->
+                    @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
+                    {
+                        <a href="@Url.Action("Index", "Cargadores", new { pagina = ViewBag.PaginaActual + 1 })" class="btn btn-primary">Página siguiente <i class="bi bi-chevron-right"></i></a>
+                    }
+                </div>
+            }
+        </div>
     </div>
 </div>
 

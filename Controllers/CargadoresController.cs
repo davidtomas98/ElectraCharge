@@ -14,13 +14,84 @@ namespace ElectraCharge.Controllers
             _context = context;
         }
 
-        // Acción para mostrar la lista de cargadores
-        public IActionResult Index()
+        // Acción para mostrar la lista de cargadores con paginación
+        public IActionResult Index(int pagina = 1, int cantidadPorPagina = 12)
         {
-            // Obtener la lista de cargadores desde la base de datos
+            // Obtener la lista de cargadores
             var cargadores = _context.Cargadores.ToList();
-            return View(cargadores);
+
+            // Calcular el total de páginas
+            int totalCargadores = cargadores.Count;
+            int totalPaginas = (int)Math.Ceiling((double)totalCargadores / cantidadPorPagina);
+
+            // Asegurarse de que la página solicitada esté dentro del rango
+            pagina = Math.Max(1, Math.Min(pagina, totalPaginas));
+
+            // Obtener los cargadores para la página actual
+            var cargadoresPagina = cargadores.Skip((pagina - 1) * cantidadPorPagina).Take(cantidadPorPagina).ToList();
+
+            // Pasar los cargadores y la información de paginación a la vista
+            ViewBag.Cargadores = cargadoresPagina;
+            ViewBag.PaginaActual = pagina;
+            ViewBag.TotalPaginas = totalPaginas;
+
+            return View(cargadoresPagina);
         }
+
+
+        // Método para obtener la lista de cargadores paginada
+        public IActionResult Index2(int pagina = 1, int cantidadPorPagina = 12)
+        {
+            // Calcular el índice de inicio y fin para la paginación
+            int indiceInicio = (pagina - 1) * cantidadPorPagina;
+            int indiceFin = indiceInicio + cantidadPorPagina;
+
+            // Obtener la lista de cargadores
+            var cargadores = _context.Cargadores.ToList();
+
+            // Obtener la lista de cargadores para la página actual
+            var cargadoresPagina = cargadores.Skip(indiceInicio).Take(cantidadPorPagina).ToList();
+
+            // Devolver los cargadores y la información de paginación como JSON
+            return Json(new { Cargadores = cargadoresPagina, PaginaActual = pagina, TotalPaginas = (int)Math.Ceiling((double)cargadores.Count / cantidadPorPagina) });
+        }
+
+        // Acción para filtrar cargadores según el criterio de búsqueda
+        [HttpGet]
+        public IActionResult FiltrarCargadores(string filtro, string valor)
+        {
+            IQueryable<Cargador> cargadores = _context.Cargadores;
+
+            // Verificar si se proporciona un valor de búsqueda
+            if (!string.IsNullOrEmpty(valor))
+            {
+                // Aplicar el filtro según el criterio seleccionado
+                if (filtro == "marca")
+                {
+                    cargadores = cargadores.Where(c => c.Marca.StartsWith(valor));
+                }
+                else if (filtro == "ubicacion")
+                {
+                    cargadores = cargadores.Where(c => c.Ubicacion.StartsWith(valor));
+                }
+                else if (filtro == "potencia")
+                {
+                    // Convertir el valor de búsqueda a entero
+                    int potencia = 0;
+                    if (int.TryParse(valor, out potencia))
+                    {
+                        cargadores = cargadores.Where(c => c.Potencia.ToString().StartsWith(valor));
+                    }
+                }
+            }
+
+            // Obtener los cargadores paginados
+            var cargadoresPaginados = cargadores.ToList();
+
+            // Devolver los datos de cargadores y la información de paginación como JSON
+            return Json(new { cargadores = cargadoresPaginados });
+        }
+
 
         // Acción para registrar un nuevo cargador
         [HttpPost]
@@ -28,6 +99,12 @@ namespace ElectraCharge.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Obtener el último ID de cargador en la base de datos
+                var ultimoId = _context.Cargadores.OrderByDescending(c => c.Id).Select(c => c.Id).FirstOrDefault();
+                
+                
+                cargador.Id = ultimoId + 1;
+
                 // Agregar el cargador a la base de datos
                 _context.Cargadores.Add(cargador);
                 _context.SaveChanges();
@@ -35,6 +112,7 @@ namespace ElectraCharge.Controllers
             }
             return View(cargador);
         }
+
 
         // Acción para mostrar el formulario de edición de un cargador
         public IActionResult Editar(int id)
@@ -89,6 +167,10 @@ namespace ElectraCharge.Controllers
             {
                 return NotFound();
             }
+
+            // Eliminar también las asignaciones relacionadas
+            var asignaciones = _context.Asignaciones.Where(a => a.IdCargador == id);
+            _context.Asignaciones.RemoveRange(asignaciones);
 
             // Eliminar el cargador de la base de datos
             _context.Cargadores.Remove(cargador);

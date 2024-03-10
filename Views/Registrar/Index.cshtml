@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Tiempo a Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Asignar tiempo a Usuario</h1>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="tiempo">Tiempo (min):</label>
+                <input type="number" class="form-control" id="tiempo" name="tiempo" placeholder="Ingrese el tiempo en minutos" required>
+            </div>
+
+            <!-- Desplegable para seleccionar un usuario -->
+            <div class="form-group">
+                <label for="usuario">Seleccionar Usuario:</label>
+                <select class="form-control" id="usuario" name="idUsuario">
+                    @foreach(var usuario in ViewBag.Usuarios)
+                    {
+                        <option value="@usuario.Id">@usuario.Nombre - (@usuario.CorreoElectronico)</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Desplegable para seleccionar un cargador -->
+            <div class="form-group">
+                <label for="cargador">Seleccionar Cargador:</label>
+                <select class="form-control" id="cargador" name="idCargador">
+                    @foreach(var cargador in ViewBag.Cargadores)
+                    {
+                        <option value="@cargador.Id">@cargador.Marca - (@cargador.Ubicacion)</option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        </form>
+
+        <!-- Botón para ir a la lista de asignaciones -->
+        <a href="@Url.Action("ListarAsignaciones", "Registrar")" class="btn btn-secondary btn-block mt-3">Ver Asignaciones</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -32,6 +32,5 @@ namespace ElectraCharge.Models
             Estado = "Disponible";
         }
 
-        public virtual ICollection<Asignar>? Asignaciones { get; set; }
     }
 }

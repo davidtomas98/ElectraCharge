@@ -26,6 +26,5 @@ namespace ElectraCharge.Models
         [Column("email")]
         public string CorreoElectronico { get; set; } = string.Empty;
         
-        public virtual ICollection<Asignar>? Asignaciones { get; set; }
     }
 }

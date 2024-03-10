@@ -22,8 +22,9 @@ namespace ElectraCharge.Controllers
         /// <summary>
         /// Retorna la vista de inicio de sesión.
         /// </summary>
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -31,7 +32,7 @@ namespace ElectraCharge.Controllers
         /// Acción para manejar la solicitud de inicio de sesión.
         /// </summary>
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public IActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -52,8 +53,16 @@ namespace ElectraCharge.Controllers
                     var principal = new ClaimsPrincipal(identity);
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                    // Redirige a la página principal después del inicio de sesión exitoso
-                    return RedirectToAction("Index", "Home");
+                    // Redirige al returnUrl después del inicio de sesión exitoso
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        // Redirige a la página principal si no hay returnUrl o si es una URL no local
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {

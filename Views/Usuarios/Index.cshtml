@@ -43,41 +43,77 @@
             </div>
         </div>
 
-        <!-- Lista de usuarios -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
-                <h2 class="text-center">Lista de Usuarios</h2>
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido 1</th>
-                            <th>Apellido 2</th>
-                            <th>Correo Electrónico</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var usuario in Model)
-                        {
-                            <tr>
-                                <td>@usuario.Nombre</td>
-                                <td>@usuario.Apellido1</td>
-                                <td>@usuario.Apellido2</td>
-                                <td>@usuario.CorreoElectronico</td>
-                                <td>
-                                    <a href="@Url.Action("Editar", "Usuarios", new { id = usuario.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
-                                    <a href="@Url.Action("Eliminar", "Usuarios", new { id = usuario.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <!-- lista de usuarios-->
+        <h1 class="text-center mt-5 mb-4">Lista de Usuarios</h1>
+
+        <div class="row mb-3">
+            <!-- Filtros de búsqueda -->
+            <div class="col-md-6">
+                <select class="form-control" id="filtro">
+                    <option value="nombre">Nombre</option>
+                    <option value="apellido1">Apellido 1</option>
+                    <option value="correoelectronico">Correo Electronico</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Buscar" id="txtBusqueda">
             </div>
         </div>
+        <!-- Tabla de usuarios -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido 1</th>
+                        <th scope="col">Apellido 2</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Acciones</th> 
+                    </tr>
+                </thead>
+                <tbody id="tablaUsuarios">
+                    <!-- Iteración sobre cada usuario en el modelo -->
+                    @foreach (var usuario in ViewBag.Usuarios)
+                    {
+                        <tr>
+                            <td>@usuario.Nombre</td>
+                            <td>@usuario.Apellido1</td>
+                            <td>@usuario.Apellido2</td>
+                            <td>@usuario.CorreoElectronico</td>
+                            <td>
+                                <!-- Acciones para editar y eliminar el usuario -->
+                                <a href="@Url.Action("Editar", "Usuarios", new { id = usuario.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
+                                <a href="@Url.Action("Eliminar", "Usuarios", new { id = usuario.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Verificar si hay más de 8 usuarios para mostrar los botones de paginación -->
+        @if (ViewBag.TotalPaginas > 1)
+        {
+            <div class="text-center">
+                <!-- Botón para ir a la página anterior -->
+                @if (ViewBag.PaginaActual > 1)
+                {
+                    <a href="@Url.Action("Index", "Usuarios", new { pagina = ViewBag.PaginaActual - 1 })" class="btn btn-primary mr-2"><i class="bi bi-chevron-left"></i> Página anterior</a>
+                }
+
+                <!-- Botón para ir a la página siguiente -->
+                @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
+                {
+                    <a href="@Url.Action("Index", "Usuarios", new { pagina = ViewBag.PaginaActual + 1 })" class="btn btn-primary"><i class="bi bi-chevron-right"></i> Página siguiente</a>
+                }
+            </div>
+        }
+    </div>
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/filterUsuario.js" asp-append-version="true"></script>
 </body>
 </html>
