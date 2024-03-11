@@ -22,9 +22,8 @@ namespace ElectraCharge.Controllers
         /// <summary>
         /// Retorna la vista de inicio de sesión.
         /// </summary>
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 

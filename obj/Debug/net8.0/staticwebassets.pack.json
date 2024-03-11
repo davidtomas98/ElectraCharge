@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\js\\filter.js"
     },
     {
+      "Id": "C:\\Chargers\\ElectraCharge\\wwwroot\\js\\filterAsignaciones.js",
+      "PackagePath": "staticwebassets\\js\\filterAsignaciones.js"
+    },
+    {
       "Id": "C:\\Chargers\\ElectraCharge\\wwwroot\\js\\filterUsuario.js",
       "PackagePath": "staticwebassets\\js\\filterUsuario.js"
     },

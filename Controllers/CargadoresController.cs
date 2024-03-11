@@ -44,7 +44,6 @@ namespace ElectraCharge.Controllers
         {
             // Calcular el índice de inicio y fin para la paginación
             int indiceInicio = (pagina - 1) * cantidadPorPagina;
-            int indiceFin = indiceInicio + cantidadPorPagina;
 
             // Obtener la lista de cargadores
             var cargadores = _context.Cargadores.ToList();

@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using ElectraCharge.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+// Add Authorization services
+app.UseAuthorization();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -31,9 +32,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); 
-app.UseAuthorization();
+// Authentication middleware should be placed after routing but before authorization
+app.UseAuthentication();
 
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

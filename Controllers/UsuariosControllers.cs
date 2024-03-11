@@ -91,6 +91,24 @@ namespace ElectraCharge.Controllers
         }
 
 
+        // Acción para obtener los detalles de un usuario
+        [HttpGet]
+        public IActionResult ObtenerUsuario(int id)
+        {
+            // Buscar el usuario en la base de datos
+            var usuario = _context.Usuarios.Find(id);
+
+            if (usuario != null)
+            {
+                // Devolver los detalles del usuario en formato JSON
+                return Json(usuario);
+            }
+            else
+            {
+                // Devolver un mensaje de error si el usuario no se encuentra
+                return Json(new { error = "Usuario no encontrado" });
+            }
+        }
 
 
 

@@ -1,6 +1,11 @@
 @using ElectraCharge.Models
 @inject ApplicationDbContext dbContext
 
+@{
+    // Obtiene todas las asignaciones ordenadas por fecha
+    var asignacionesOrdenadas = dbContext.Asignaciones.OrderByDescending(a => a.Fecha).ToList();
+}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,22 +22,34 @@
     <!-- Título de la lista de asignaciones -->
     <h1 class="text-center mt-5 mb-4">Lista de Asignaciones</h1>
 
+    <div class="row mb-3">
+        <!-- Filtros de búsqueda -->
+        <div class="col-md-6">
+            <select class="form-control" id="filtro">
+                <option value="nombre">Nombre</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar" id="txtBusqueda">
+        </div>
+    </div>
+
     <!-- Tabla de asignaciones -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Cargador</th>
-                        <th scope="col">Tiempo (min)</th>
-                        <th scope="col">Fecha</th> 
-                    </tr>
-                </thead>
-                <tbody id="tablaAsignaciones">
-                    <!-- Iteración sobre cada uusario en la página actual -->
-                    @foreach (var asignacion in ViewBag.Asignaciones)
-                    {
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Cargador</th>
+                    <th scope="col">Tiempo (min)</th>
+                    <th scope="col">Fecha</th> 
+                </tr>
+            </thead>
+            <tbody id="tablaAsignaciones">
+                <!-- Iteración sobre cada asignación en la página actual -->
+                @foreach (var asignacion in asignacionesOrdenadas)
+                {
                     <tr>
                         <td>@asignacion.Id</td>
                         <td>
@@ -43,42 +60,17 @@
                         </td>
                         <td>@asignacion.IdCargador</td>
                         <td>@asignacion.Tiempo</td>
-                        <td>@asignacion.Fecha</td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Botones de paginación -->
-        <div class="text-center">
-            @if (ViewBag.TotalPaginas > 1)
-            {
-            <div class="text-center">
-                <!-- Botón para ir a la página anterior -->
-                @if (ViewBag.PaginaActual > 1)
-                {
-                    <a href="@Url.Action("ListarAsignaciones", "Registrar", new { pagina = ViewBag.PaginaActual - 1 })" class="btn btn-primary mr-2"><i class="bi bi-chevron-left"></i> Página anterior</a>
+                        <td>@asignacion.Fecha.ToString("dd/MM/yyyy")</td>
+                   </tr>
                 }
+            </tbody>
+        </table>
+    </div>
 
-                <!-- Botón para ir a la página siguiente -->
-                @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
-                {
-                    <a href="@Url.Action("ListarAsignaciones", "Registrar", new { pagina = ViewBag.PaginaActual + 1 })" class="btn btn-primary"><i class="bi bi-chevron-right"></i> Página siguiente</a>
-                }
-
-                <!-- Botón para volver -->
-                <a href="@Url.Action("Index", "Registrar")" class="btn btn-primary ml-2"><i class="bi bi-arrow-left"></i> Volver</a>
-            </div>
-            }
-            else
-            {
-                <!-- Si no hay más de 8 asignaciones, solo se muestra el botón de volver -->
-                <div class="text-center">
-                    <a href="@Url.Action("Index", "Registrar")" class="btn btn-primary"><i class="bi bi-arrow-left"></i> Volver</a>
-                </div>
-            }
-        </div>
+    <!-- Botones de paginación -->
+    <div class="text-center">
+        <!-- Botón para volver -->
+        <a href="@Url.Action("Index", "Registrar")" class="btn btn-primary"><i class="bi bi-arrow-left"></i> Volver</a>
     </div>
 </div>
 
@@ -86,6 +78,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="~/js/filterUsuario.js" asp-append-version="true"></script>
+<script src="~/js/filterAsignaciones.js" asp-append-version="true"></script>
 </body>
 </html>

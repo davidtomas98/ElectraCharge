@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
 using System.Linq;
+using System;
 
 namespace ElectraCharge.Controllers
 {
@@ -12,7 +13,8 @@ namespace ElectraCharge.Controllers
         {
             _context = context;
         }
-// Método para mostrar el formulario de registro con la lista de usuarios y cargadores
+
+        // Método para mostrar el formulario de registro con la lista de usuarios y cargadores
         public IActionResult Index()
         {
             var usuarios = _context.Usuarios.ToList();
@@ -24,32 +26,22 @@ namespace ElectraCharge.Controllers
             return View();
         }
 
-        // Método para mostrar la lista de asignaciones con paginación
-        public IActionResult Index2(int pagina = 1)
+        
+        // Método para obtener la lista de asignaciones paginada y ordenada por fecha
+        public IActionResult Index2(int pagina = 1, int cantidadPorPagina = 12)
         {
-            int cantidadPorPagina = 25;
+            // Calcular el índice de inicio y fin para la paginación
+            int indiceInicio = (pagina - 1) * cantidadPorPagina;
 
-            // Obtener la lista de asignaciones
-            var asignaciones = _context.Asignaciones.ToList();
+            // Obtener la lista de asignaciones ordenada por fecha
+            var asignacionesOrdenadas = _context.Asignaciones.OrderByDescending(a => a.Fecha);
 
-            // Calcular el total de páginas
-            int totalAsignaciones = asignaciones.Count;
-            int totalPaginas = (int)Math.Ceiling((double)totalAsignaciones / cantidadPorPagina);
+            // Obtener la lista de asignaciones para la página actual
+            var asignacionesPagina = asignacionesOrdenadas.Skip(indiceInicio).Take(cantidadPorPagina).ToList();
 
-            // Asegurarse de que la página solicitada esté dentro del rango
-            pagina = Math.Max(1, Math.Min(pagina, totalPaginas));
-
-            // Obtener las asignaciones para la página actual
-            var asignacionesPagina = asignaciones.Skip((pagina - 1) * cantidadPorPagina).Take(cantidadPorPagina).ToList();
-
-            // Pasar las asignaciones y la información de paginación a la vista
-            ViewBag.Asignaciones = asignacionesPagina;
-            ViewBag.PaginaActual = pagina;
-            ViewBag.TotalPaginas = totalPaginas;
-
-            return View();
+            // Devolver las asignaciones y la información de paginación como JSON
+            return Json(new { Asignaciones = asignacionesPagina, PaginaActual = pagina, TotalPaginas = (int)Math.Ceiling((double)asignacionesOrdenadas.Count() / cantidadPorPagina) });
         }
-
 
         // Método para mostrar la lista de asignaciones con paginación
         public IActionResult ListarAsignaciones(int pagina = 1)
@@ -77,8 +69,6 @@ namespace ElectraCharge.Controllers
             return View();
         }
 
-
-        
         // Método para registrar una nueva asignación
         [HttpPost]
         public IActionResult Index(int idUsuario, int idCargador, int tiempo)
@@ -106,5 +96,35 @@ namespace ElectraCharge.Controllers
             }
             return View();
         }
+
+        // Acción para filtrar asignaciones según el criterio de búsqueda
+        [HttpGet]
+        public IActionResult FiltrarAsignaciones(string filtro, string valor)
+        {
+            IQueryable<Asignacion> asignacionesFiltradas;
+
+            // Verificar si se proporciona un valor de búsqueda
+            if (!string.IsNullOrEmpty(valor))
+            {
+                // Realizar la operación de unión (join) para obtener el nombre del usuario
+                asignacionesFiltradas = (from asignacion in _context.Asignaciones
+                                        join usuario in _context.Usuarios on asignacion.IdUsuario equals usuario.Id
+                                        where usuario.Nombre.StartsWith(valor)
+                                        select asignacion);
+            }
+            else
+            {
+                // Si no se proporciona un valor de búsqueda, mostrar todas las asignaciones
+                asignacionesFiltradas = _context.Asignaciones;
+            }
+
+            // Convertir la consulta en una lista
+            var asignaciones = asignacionesFiltradas.ToList();
+
+            // Devolver los resultados en formato JSON
+            return Json(new { asignaciones = asignaciones });
+        }
+
     }
+
 }
