@@ -32,10 +32,8 @@ namespace ElectraCharge.Controllers
         /// Acción para manejar la solicitud de inicio de sesión.
         /// </summary>
         [HttpPost]
-        public IActionResult Login(LoginViewModel model, string returnUrl)
+        public IActionResult Login(Administrador model, string returnUrl)
         {
-            if (ModelState.IsValid)
-            {
                 // Busca el usuario en la base de datos
                 var user = _context.Administradores.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
@@ -69,7 +67,7 @@ namespace ElectraCharge.Controllers
                     // Muestra mensaje de advertencia si el correo electrónico o la contraseña no coinciden
                     ModelState.AddModelError("Email", "Correo electrónico o contraseña incorrectos.");
                 }
-            }
+            
 
             // Si hay un error en el modelo o la autenticación falla, vuelve a mostrar el formulario de inicio de sesión
             return View(model);

@@ -9,83 +9,83 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ElectraCharge
 build_property.RootNamespace = ElectraCharge
-build_property.ProjectDir = C:\itech515\carrgadores\ElectraCharge\
+build_property.ProjectDir = C:\Chargers\ElectraCharge\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\itech515\carrgadores\ElectraCharge
+build_property.MSBuildProjectDirectory = C:\Chargers\ElectraCharge
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Account/AccessDenied.cshtml]
+[C:/Chargers/ElectraCharge/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Account/Login.cshtml]
+[C:/Chargers/ElectraCharge/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Account/Register.cshtml]
+[C:/Chargers/ElectraCharge/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Cargadores/Editar.cshtml]
+[C:/Chargers/ElectraCharge/Views/Cargadores/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZ2Fkb3Jlc1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Cargadores/Eliminar.cshtml]
+[C:/Chargers/ElectraCharge/Views/Cargadores/Eliminar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZ2Fkb3Jlc1xFbGltaW5hci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Cargadores/Index.cshtml]
+[C:/Chargers/ElectraCharge/Views/Cargadores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZ2Fkb3Jlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Home/Index.cshtml]
+[C:/Chargers/ElectraCharge/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Home/Privacy.cshtml]
+[C:/Chargers/ElectraCharge/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Registrar/Index.cshtml]
+[C:/Chargers/ElectraCharge/Views/Registrar/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmFyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Registrar/ListarAsignaciones.cshtml]
+[C:/Chargers/ElectraCharge/Views/Registrar/ListarAsignaciones.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmFyXExpc3RhckFzaWduYWNpb25lcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Shared/Error.cshtml]
+[C:/Chargers/ElectraCharge/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Chargers/ElectraCharge/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Usuarios/Editar.cshtml]
+[C:/Chargers/ElectraCharge/Views/Usuarios/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Usuarios/Eliminar.cshtml]
+[C:/Chargers/ElectraCharge/Views/Usuarios/Eliminar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWxpbWluYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Usuarios/Index.cshtml]
+[C:/Chargers/ElectraCharge/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/_ViewImports.cshtml]
+[C:/Chargers/ElectraCharge/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/_ViewStart.cshtml]
+[C:/Chargers/ElectraCharge/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/itech515/carrgadores/ElectraCharge/Views/Shared/_Layout.cshtml]
+[C:/Chargers/ElectraCharge/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-unsn6snprf

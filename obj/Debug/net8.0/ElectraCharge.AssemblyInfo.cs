@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ElectraCharge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a789c2e55e146d5e00910b0957525b2ab1359689")]
 [assembly: System.Reflection.AssemblyProductAttribute("ElectraCharge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ElectraCharge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
