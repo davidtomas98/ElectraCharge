@@ -27,20 +27,21 @@ namespace ElectraCharge.Controllers
         }
 
         
-        // Método para obtener la lista de asignaciones paginada y ordenada por fecha
-        public IActionResult Index2(int pagina = 1, int cantidadPorPagina = 12)
+         
+        // Método para obtener la lista de asignaciones paginada
+        public IActionResult Index2(int pagina = 1, int cantidadPorPagina = 25)
         {
             // Calcular el índice de inicio y fin para la paginación
             int indiceInicio = (pagina - 1) * cantidadPorPagina;
 
-            // Obtener la lista de asignaciones ordenada por fecha
-            var asignacionesOrdenadas = _context.Asignaciones.OrderByDescending(a => a.Fecha);
+            // Obtener la lista de asignaciones
+            var asignaciones = _context.Asignaciones.ToList();
 
             // Obtener la lista de asignaciones para la página actual
-            var asignacionesPagina = asignacionesOrdenadas.Skip(indiceInicio).Take(cantidadPorPagina).ToList();
+            var asignacionPagina = asignaciones.Skip(indiceInicio).Take(cantidadPorPagina);
 
-            // Devolver las asignaciones y la información de paginación como JSON
-            return Json(new { Asignaciones = asignacionesPagina, PaginaActual = pagina, TotalPaginas = (int)Math.Ceiling((double)asignacionesOrdenadas.Count() / cantidadPorPagina) });
+            // Devolver los asignaciones y la información de paginación como JSON
+            return Json(new { Asignaciones = asignacionPagina, PaginaActual = pagina, TotalPaginas = (int)Math.Ceiling((double)asignaciones.Count / cantidadPorPagina) });
         }
 
         // Método para mostrar la lista de asignaciones con paginación
