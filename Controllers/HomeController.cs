@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using ElectraCharge.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElectraCharge.Controllers
 {
@@ -15,12 +15,14 @@ namespace ElectraCharge.Controllers
         }
 
         // Método para mostrar la página de inicio
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
         // Método para mostrar la página de privacidad
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

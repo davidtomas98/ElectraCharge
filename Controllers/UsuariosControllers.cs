@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
-using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElectraCharge.Controllers
 {
@@ -13,6 +13,7 @@ namespace ElectraCharge.Controllers
             _context = context;
         }
         // Método para mostrar la lista de usuarios con paginación
+        [Authorize]
         public IActionResult Index(int pagina = 1, int cantidadPorPagina = 10)
         {
             // Obtener la lista de usuarios

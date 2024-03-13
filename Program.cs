@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using ElectraCharge.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Agregar servicios al contenedor.
 builder.Services.AddControllersWithViews();
 
-// Configure DbContext
+// Configurar DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")))
            .UseLoggerFactory(LoggerFactory.Create(builder =>
@@ -14,16 +15,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                builder.AddConsole();
            })));
 
+// Agregar servicios de autenticación
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login"; // Especifica la ruta de inicio de sesión
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Especifica la ruta de acceso denegado
+    });
+
 var app = builder.Build();
 
-// Add Authorization services
+// Agregar servicios de autorización
 app.UseAuthorization();
 
-// Configure the HTTP request pipeline.
+// Configurar el pipeline de solicitud HTTP.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // El valor HSTS predeterminado es de 30 días. Puede que desees cambiar esto para escenarios de producción, consulta https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -32,7 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Authentication middleware should be placed after routing but before authorization
+// El middleware de autenticación debe colocarse después del enrutamiento pero antes de la autorización
 app.UseAuthentication();
 
 app.UseAuthorization();

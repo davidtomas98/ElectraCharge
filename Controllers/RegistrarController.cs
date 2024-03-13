@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
-using System.Linq;
-using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElectraCharge.Controllers
 {
@@ -15,6 +14,7 @@ namespace ElectraCharge.Controllers
         }
 
         // Método para mostrar el formulario de registro con la lista de usuarios y cargadores
+        [Authorize]
         public IActionResult Index()
         {
             var usuarios = _context.Usuarios.ToList();

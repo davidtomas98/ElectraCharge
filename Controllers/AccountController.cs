@@ -24,6 +24,8 @@ namespace ElectraCharge.Controllers
         /// </summary>
         public IActionResult Login()
         {
+            // Borrar cookies de autenticación existentes
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 

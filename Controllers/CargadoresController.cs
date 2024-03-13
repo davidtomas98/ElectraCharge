@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
-using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElectraCharge.Controllers
 {
@@ -15,6 +15,7 @@ namespace ElectraCharge.Controllers
         }
 
         // Acción para mostrar la lista de cargadores con paginación
+        [Authorize]
         public IActionResult Index(int pagina = 1, int cantidadPorPagina = 12)
         {
             // Obtener la lista de cargadores
