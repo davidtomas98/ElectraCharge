@@ -11,7 +11,15 @@
     <div class="container">
         <h1 class="text-center mt-5">Asignar tiempo a Usuario</h1>
 
-        <form method="post">
+        <!-- Agregar mensaje de éxito -->
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["MensajeExito"]
+            </div>
+        }
+
+        <form method="post" id="form-registrar">
             <div class="form-group">
                 <label for="tiempo">Tiempo (min):</label>
                 <input type="number" class="form-control" id="tiempo" name="tiempo" placeholder="Ingrese el tiempo en minutos" required>
@@ -39,15 +47,48 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <button type="button" class="btn btn-primary btn-block" id="btn-confirm">Registrar</button>
         </form>
 
         <!-- Botón para ir a la lista de asignaciones -->
         <a href="@Url.Action("ListarAsignaciones", "Registrar")" class="btn btn-secondary btn-block mt-3">Ver Asignaciones</a>
     </div>
 
+    <!-- Confirmación modal -->
+    <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmacionModalLabel">Confirmación de Envío</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de enviar la asignación?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-confirm-modal">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Mostrar modal de confirmación al hacer clic en el botón Registrar
+        $('#btn-confirm').click(function () {
+            $('#confirmacionModal').modal('show');
+        });
+
+        // Enviar el formulario cuando se confirme en el modal
+        $('#btn-confirm-modal').click(function () {
+            $('#form-registrar').submit();
+        });
+    </script>
 </body>
 </html>

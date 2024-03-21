@@ -250,3 +250,7 @@ C:\itech515\ElectraCharge\obj\Debug\net8.0\refint\ElectraCharge.dll
 C:\itech515\ElectraCharge\obj\Debug\net8.0\ElectraCharge.pdb
 C:\itech515\ElectraCharge\obj\Debug\net8.0\ElectraCharge.genruntimeconfig.cache
 C:\itech515\ElectraCharge\obj\Debug\net8.0\ref\ElectraCharge.dll
+C:\itech515\ElectraCharge\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\itech515\ElectraCharge\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\itech515\ElectraCharge\bin\Debug\net8.0\package-lock.json
+C:\itech515\ElectraCharge\bin\Debug\net8.0\package.json

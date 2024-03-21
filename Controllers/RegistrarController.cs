@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
 
 namespace ElectraCharge.Controllers
 {
@@ -93,10 +94,86 @@ namespace ElectraCharge.Controllers
 
                 _context.Asignaciones.Add(asignacion);
                 _context.SaveChanges();
+
+                // Enviar correo electrónico al usuario
+                EnviarCorreoElectronico(idUsuario);
+
+                // Establecer mensaje de éxito en TempData
+                TempData["MensajeExito"] = "La asignación se ha realizado correctamente.";
+
                 return RedirectToAction("Index", "Registrar");
             }
+
             return View();
+}
+
+        // Método para enviar correo electrónico al usuario
+        private void EnviarCorreoElectronico(int idUsuario)
+        {
+            // Obtener la información del usuario
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == idUsuario);
+
+            // Obtener la última asignación para el usuario con el ID especificado
+            var ultimaAsignacion = _context.Asignaciones
+                .Where(a => a.IdUsuario == idUsuario)
+                .OrderByDescending(a => a.Fecha)
+                .FirstOrDefault();
+
+            if (usuario != null && ultimaAsignacion != null)
+            {
+                try
+                {
+                    // Obtener el nombre de usuario y la contraseña del administrador autenticado si la identidad no es nula
+                    var adminUsername = User?.Identity?.Name;
+
+                    if (adminUsername != null)
+                    {
+                        var admin = _context.Administradores.FirstOrDefault(a => a.Email == adminUsername);
+                        if (admin != null)
+                        {
+                            // Crear un cliente de correo electrónico
+                            SmtpClient clienteSmtp = new SmtpClient("smtp.outlook.com")
+                            {
+                                Port = 587,
+                                Credentials = new System.Net.NetworkCredential(admin.Email, admin.Password),
+                                EnableSsl = true
+                            };
+
+                            // Crear el mensaje de correo electrónico
+                            MailMessage mensaje = new MailMessage(admin.Email, usuario.CorreoElectronico)
+                            {
+                                Subject = "Nueva asignación realizada",
+                                Body = $"Hola {usuario.Nombre},\n\nSe ha realizado una nueva asignación para ti.\n\nTiempo asignado: {ultimaAsignacion.Tiempo} minutos.\n\nSaludos,\n{admin.Username}"
+                            };
+
+                            // Enviar el correo electrónico
+                            clienteSmtp.Send(mensaje);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se encontró el administrador en la base de datos.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No se pudo obtener el nombre de usuario del administrador autenticado.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier error en el envío del correo electrónico
+                    Console.WriteLine("Error al enviar el correo electrónico: " + ex.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontró información de usuario o asignación para el usuario con ID: " + idUsuario);
+            }
         }
+
+
+
+
 
         // Acción para filtrar asignaciones según el criterio de búsqueda
         [HttpGet]

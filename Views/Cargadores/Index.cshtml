@@ -88,6 +88,8 @@
                                 <!-- Acciones para editar y eliminar el cargador -->
                                 <a href="@Url.Action("Editar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></a>
                                 <a href="@Url.Action("Eliminar", "Cargadores", new { id = cargador.Id })" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                                <!-- Botón para actualizar el estado del cargador -->
+                                <button onclick="actualizarEstadoCargador(@cargador.Id)" class="btn btn-success"><i class="bi bi-arrow-clockwise"></i> Actualizar Estado</button>
                             </td>
                         </tr>
                     }
@@ -122,5 +124,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="~/js/filter.js" asp-append-version="true"></script>
+<script src="~/js/stateUpdate.js" asp-append-version="true"></script>
 </body>
 </html>

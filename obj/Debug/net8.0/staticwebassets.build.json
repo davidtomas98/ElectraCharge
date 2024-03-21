@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T45L4c3cy3ouYyRVzTP7n4DilegyKXbZtKoETRXNzB4=",
+  "Hash": "wc6M5f6L4K650GCmnv6pm6iF5fqtMbfu2z0qCTlIW4g=",
   "Source": "ElectraCharge",
   "BasePath": "_content/ElectraCharge",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\itech515\\ElectraCharge\\wwwroot\\js\\stateUpdate.js",
+      "SourceId": "ElectraCharge",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\itech515\\ElectraCharge\\wwwroot\\",
+      "BasePath": "_content/ElectraCharge",
+      "RelativePath": "js/stateUpdate.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\stateUpdate.js"
     },
     {
       "Identity": "C:\\itech515\\ElectraCharge\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",

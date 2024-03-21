@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ElectraCharge.Models;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
+
 
 namespace ElectraCharge.Controllers
 {
@@ -9,7 +11,7 @@ namespace ElectraCharge.Controllers
         private readonly ApplicationDbContext _context;
 
         // Constructor del controlador CargadoresController
-        public CargadoresController(ApplicationDbContext context)
+        public CargadoresController(ApplicationDbContext context )
         {
             _context = context;
         }

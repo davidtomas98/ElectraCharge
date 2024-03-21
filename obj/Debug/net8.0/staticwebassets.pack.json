@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\itech515\\ElectraCharge\\wwwroot\\js\\stateUpdate.js",
+      "PackagePath": "staticwebassets\\js\\stateUpdate.js"
+    },
+    {
       "Id": "C:\\itech515\\ElectraCharge\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

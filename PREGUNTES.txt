@@ -1,0 +1,5 @@
+PREGUNTES:
+
+¿Guardar l'ID de l'administrador en l'assignació?
+¿Com fer el login amb ports diferents per saber la ubicació i mostrar els carregadors acords amb la localització?
+Un cop enviada l'assignació, ¿com puc saber el temps que li queda del que s'ha assignat o com puc saber si l'ha consumit?
